@@ -1,0 +1,8 @@
+stateDiagram-v2
+  [*] --> New
+  New --> Cleaned: crawl persist
+  Cleaned --> Summarized: inference ok
+  New --> Failed: extract error
+  Cleaned --> Failed: summarize error
+  Failed --> [*]
+  Summarized --> [*]

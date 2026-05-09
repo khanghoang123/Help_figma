@@ -1,0 +1,32 @@
+flowchart LR
+  Reader((Reader))
+  Admin((Admin))
+  Scheduler((Scheduler))
+  Labeler((Labeling Worker))
+  Trainer((Training Job))
+  Vertex((Vertex AI))
+
+  subgraph SYS["vn-news-summarizer"]
+    UC1([Browse summaries])
+    UC2([View article detail])
+    UC3([Filter by source or category])
+    UC4([Run crawl job])
+    UC5([Extract and dedupe articles])
+    UC6([Publish summaries])
+    UC7([Label summaries])
+    UC8([Train model])
+    UC9([Serve API])
+  end
+
+  Reader --> UC1
+  Reader --> UC2
+  Reader --> UC3
+  Admin --> UC6
+  Scheduler --> UC4
+  Scheduler --> UC5
+  Labeler --> UC7
+  Trainer --> UC8
+  Vertex --> UC7
+  UC9 --> UC1
+  UC9 --> UC2
+  UC9 --> UC3
