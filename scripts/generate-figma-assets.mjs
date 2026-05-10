@@ -291,8 +291,12 @@ ${hotspotLines || '    '}
     })
     .join('\n');
 
+  const topLeftScreen = [...screens].sort((a, b) => a.originY - b.originY || a.originX - b.originX)[0];
   const initialKey =
-    metadata.find((screen) => screen.key === 'splash')?.key ?? metadata[0]?.key ?? 'splash';
+    metadata.find((screen) => screen.key === 'splash')?.key ??
+    topLeftScreen?.key ??
+    metadata[0]?.key ??
+    'splash';
 
   const generatedModule = `export type FigmaHotspot = {
   id: string;
